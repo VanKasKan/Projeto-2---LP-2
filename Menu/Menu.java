@@ -6,9 +6,53 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import Objetos.Usuario;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+
+    private boolean modoEscuro;
+
+    public boolean isModoEscuro() {
+        return modoEscuro;
+    }
+
+    public Menu(){
+        setModoEscuro(false);
+    }
+
+    public int processaToken(int i, int j){
+        Scanner sc = new Scanner(System.in);
+
+        while (true){
+            try {
+                int tk;
+                System.out.print("Opção: ");
+                tk = sc.nextInt();
+                sc.nextLine();
+
+                if(tk < i || tk > j){
+
+                    System.out.print("\nOpção inválida\n");
+
+                } else {
+
+                    return tk;
+
+                }
+
+            } catch(InputMismatchException e) {
+
+                System.out.print("\nOpção inválida\n");
+                sc.nextLine();
+
+            }
+        }
+    }
+
+    public void setModoEscuro(boolean modoEscuro) {
+        this.modoEscuro = modoEscuro;
+    }
 
     public ArrayList<Usuario> carregaLogins() throws IOException, ClassNotFoundException{
 

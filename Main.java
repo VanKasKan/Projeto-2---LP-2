@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +17,7 @@ public class Main {
         Menu opMenu = new Menu();
         ArrayList<Usuario> usuarios = null;
         Path caminho = Paths.get("Dados/Logins.bin");
+        Usuario usuarioAtual = null;
 
         System.out.print("\n===============\nBem-vindo(a)\n===============\n");
         while (true){
@@ -26,21 +26,7 @@ public class Main {
             System.out.print("\n[1] Entrar\n[2] Cadastrar-se\n[3] Configurações\n[4] Sair\n");
             System.out.print("\n===============\n");
 
-            while(true){
-                try{
-                    System.out.print("Opção: ");
-                    opc = sc.nextInt();
-
-                    if(opc < 1 || opc > 4){
-                        System.out.print("Opção inválida\n");
-                        continue;
-                    }
-                    break;
-                } catch (InputMismatchException e){
-                    System.out.print("Inserção inválida\n");
-                    sc.nextLine();
-                }
-            }
+            opc = opMenu.processaToken(1, 4);
 
 
             if(opc == 4){
@@ -49,8 +35,6 @@ public class Main {
             }
 
             if(opc == 1){
-
-                Usuario user;
 
                 if(usuarios == null) {
 
@@ -70,7 +54,6 @@ public class Main {
 
                     }
                 } else {
-                    boolean termina = false;
 
                     while(true){
 
@@ -85,26 +68,28 @@ public class Main {
 
                         System.out.print("\n");
 
+                        boolean achou = false;
 
-                        for(int i = 0; i < usuarios.size(); i++){
+                        for (Usuario usuario : usuarios) {
 
-                            if(usuarios.get(i).verificaLogin(login)){
+                            if (usuario.verificaLogin(login)) {
+                                achou = true;
 
-                                while(true){
+                                while (true) {
 
                                     System.out.print("\nSenha (v para voltar): ");
                                     String senha = sc.next();
 
-                                    if(senha.equals("v")){
-                                        termina = true;
+                                    if (senha.equals("v")) {
                                         break;
                                     }
 
                                     System.out.print("\n");
 
-                                    if(usuarios.get(i).verificaSenha(senha)){
+                                    if (usuario.verificaSenha(senha)) {
 
-                                        user = usuarios.get(i);
+                                        usuarioAtual = usuario;
+                                        System.out.print("\nAbrindo usuário...\n");
 
                                         System.out.print("\n===============\n");
                                         break;
@@ -117,22 +102,18 @@ public class Main {
 
                                 }
 
-                                if(termina){
-                                    break;
-                                }
-
-                            } else if(i++ == usuarios.size()){
-
-                                System.out.print("\nLogin não encontrado!\n");
+                                break;
 
                             }
                         }
 
-                        if(termina){
+                        if (!achou){
+                            System.out.print("\nLogin não encontrado!\n");
 
-                            break;
-
+                            continue;
                         }
+
+                        break;
                     }
                 }
 
@@ -199,7 +180,6 @@ public class Main {
 
                         user = new Usuario(login, senha);
                         usuarios = new ArrayList<>();
-                        usuarios.add(user);
 
                     } else {
                         System.out.print("\n===============\n\nNovo cadastro (v para voltar)\n");
@@ -228,14 +208,125 @@ public class Main {
                         }
 
                         user = new Usuario(login, senha);
-                        usuarios.add(user);
-                        System.out.print("\nUsuário criado!\n\nLogue para jogar!\n");
+
                     }
+                    usuarios.add(user);
+                    System.out.print("\nUsuário criado!\n\nLogue para jogar!\n");
+                    break;
 
                 }
 
-            } else if(opc == 3){
-                System.out.print("\nconfigurações\n");
+            } else {
+                int drkLght;
+
+                if(usuarioAtual == null){
+
+                    while (true){
+                        if(opMenu.isModoEscuro()){
+
+                            System.out.print("\n===============\n[1] Modo claro\n[2] Voltar\n===============\n");
+
+                            drkLght = opMenu.processaToken(1, 2);
+
+                            if(drkLght == 2){
+                                break;
+                            } else {
+
+                                opMenu.setModoEscuro(false);
+                                System.out.print("\n===============\n\nModo claro ativado\n\n===============\n");
+                            }
+                        } else {
+
+                            System.out.print("\n===============\n[1] Modo escuro\n[2] Voltar\n===============\n");
+
+                            drkLght = opMenu.processaToken(1, 2);
+
+                            if(drkLght == 2){
+                                break;
+                            } else {
+
+                                opMenu.setModoEscuro(true);
+                                System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
+
+                            }
+                        }
+                    }
+
+                } else {
+
+                    while (true){
+
+                        if(opMenu.isModoEscuro()){
+                            System.out.print("\n===============\n[1] Modo claro\n[2] Configurações da conta\n[3] Voltar\n===============\n");
+
+                            drkLght = opMenu.processaToken(1, 3);
+
+                            if(drkLght == 3){
+                                break;
+                            } else if(drkLght == 2){
+
+                                System.out.print("\n===============\n");
+                                usuarioAtual.imprimeLogin();
+
+                                System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[3] Voltar\n");
+                                int opcao = opMenu.processaToken(1, 3);
+
+                                if(opcao == 3){
+                                    break;
+                                } else if(opcao == 2){
+
+                                    usuarioAtual.modificarSenha();
+
+                                } else {
+
+                                    usuarioAtual.modificarLogin();
+                                }
+
+                            } else {
+
+                                opMenu.setModoEscuro(false);
+                                System.out.print("\n===============\n\nModo claro ativado\n\n===============\n");
+
+                            }
+                        } else {
+                            System.out.print("\n===============\n[1] Modo escuro\n[2] Configurações da conta\n[3] Voltar\n===============\n");
+
+                            drkLght = opMenu.processaToken(1, 3);
+
+                            if(drkLght == 3){
+                                break;
+                            } else if(drkLght == 2){
+
+                                System.out.print("\n===============\n");
+                                usuarioAtual.imprimeLogin();
+
+                                System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[3] Voltar\n");
+                                int opcao = opMenu.processaToken(1, 3);
+
+                                if(opcao == 3){
+                                    break;
+                                } else if(opcao == 2){
+
+                                    usuarioAtual.modificarSenha();
+
+                                } else {
+
+                                    usuarioAtual.modificarLogin();
+                                }
+
+                            } else {
+
+                                opMenu.setModoEscuro(false);
+                                System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
+
+                            }
+
+                        }
+                    }
+
+
+                }
+
                 //altera modo escuro e edita login
             }
         }
