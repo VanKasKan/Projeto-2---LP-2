@@ -1,0 +1,23 @@
+package Objetos;
+
+public enum Arquetipo {
+    ESTUDIOSO,
+    AMNESICO,
+    HERDEIRO,
+    ATLETA,
+    EREMITA,
+    OPERARIO,
+    CONSELHO_ESTUDANTIL,
+    ARTISTA,
+    DELINQUENTE,
+    SOLITARIO,
+    RELIGIOSO,
+    POTENCIA,
+    PESOMORTO,
+    POPULAR,
+    CAPETA,
+    OBSTINADO,
+    SORTUDO,
+    VILAO,
+    GENERICA
+}
