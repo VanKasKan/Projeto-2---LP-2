@@ -1,14 +1,16 @@
 package Objetos;
+
 import java.util.HashMap;
 
-public class Personagem {
+public abstract class Personagem {
+
     private String nome;
     private Arquetipo arquetipo;
     private int sociabilidade;
     private Trabalho trabalho;
-    private HashMap<String,Integer> relacionamento;
+    private HashMap<String, Integer> relacionamento;
 
-    public Personagem(String nome, Arquetipo arquetipo, int sociabilidade, Trabalho trabalho ){
+    public Personagem(String nome, Arquetipo arquetipo, int sociabilidade, Trabalho trabalho) {
         setArquetipo(arquetipo);
         setNome(nome);
         setSociabilidade(sociabilidade);
@@ -22,7 +24,7 @@ public class Personagem {
     public String getNome() {
         return nome;
     }
-    
+
     public int getSociabilidade() {
         return sociabilidade;
     }
@@ -41,7 +43,7 @@ public class Personagem {
 
     private void setSociabilidade(int sociabilidade) {
         if (sociabilidade >= 0) {
-        this.sociabilidade = sociabilidade;
+            this.sociabilidade = sociabilidade;
         } else {
             this.sociabilidade = 0;
         }
@@ -51,12 +53,12 @@ public class Personagem {
         this.trabalho = trabalho;
     }
 
-    public void manipularRelacionamento(int modificador, String nome){
+    public void manipularRelacionamento(int modificador, String nome) {
         if (this.relacionamento == null) {
             this.relacionamento = new HashMap<String, Integer>();
             manipularRelacionamento(modificador, nome);
         } else {
-            if (this.relacionamento.containsKey(nome)){
+            if (this.relacionamento.containsKey(nome)) {
                 int valorBase = this.relacionamento.get(nome);
                 int valorModificado = valorBase + modificador;
                 this.relacionamento.put(nome, valorModificado);
