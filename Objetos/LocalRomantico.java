@@ -2,7 +2,7 @@ package Objetos;
 
 import java.util.Random;
 
-public class LocalRomantico extends Locais {
+public class LocalRomantico extends Local {
 
     private Random r = new Random();
 

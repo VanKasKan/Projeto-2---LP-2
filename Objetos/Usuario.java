@@ -7,7 +7,7 @@ public class Usuario {
     private String login;
     private String senha;
     ArrayList<Personagem> personagens;
-
+    Scanner sc = new Scanner(System.in);
 
     public Usuario(String login, String senha){
         setLogin(login);
@@ -51,7 +51,6 @@ public class Usuario {
     }
 
     public void modificarSenha(){
-        Scanner sc = new Scanner(System.in);
         while (true){
 
             System.out.print("\n[1] Sair\nSenha atual: ");
@@ -81,7 +80,6 @@ public class Usuario {
     }
 
     public void modificarLogin(){
-        Scanner sc = new Scanner(System.in);
         while (true){
 
             System.out.print("\n[1] Sair\nSenha: ");

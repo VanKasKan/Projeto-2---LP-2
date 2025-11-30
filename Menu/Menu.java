@@ -1,9 +1,5 @@
 package Menu;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import Objetos.Usuario;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -12,6 +8,8 @@ import java.util.Scanner;
 public class Menu {
 
     private boolean modoEscuro;
+    Scanner sc = new Scanner(System.in);
+
 
     public boolean isModoEscuro() {
         return modoEscuro;
@@ -22,7 +20,6 @@ public class Menu {
     }
 
     public int processaToken(int i, int j){
-        Scanner sc = new Scanner(System.in);
 
         while (true){
             try {

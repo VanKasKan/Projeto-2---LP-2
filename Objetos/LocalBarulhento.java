@@ -2,7 +2,7 @@ package Objetos;
 
 import java.util.Random;
 
-public class LocalBarulhento extends Locais {
+public class LocalBarulhento extends Local {
 
     private Random r = new Random();
 

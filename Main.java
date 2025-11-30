@@ -1,6 +1,5 @@
 import Objetos.*;
 import Menu.Menu;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -330,11 +329,6 @@ public class Main {
                 //altera modo escuro e edita login
             }
         }
-
-
-
-        //Personagem jogador = new Estudante(Interesses.valueOf("HONKAI"), "qualquerum", Arquetipo.valueOf("HERDEIRO"), 15, Trabalho.valueOf("ESTUDANTE"));
-        //System.out.println(jogador.getNome());
     }
 }
 

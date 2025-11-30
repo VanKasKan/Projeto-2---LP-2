@@ -1,11 +1,11 @@
 package Objetos;
 
-public abstract class Locais {
+public abstract class Local {
 
     private String nome;
     private String descricao;
 
-    public Locais(String nome, String descricao) {
+    public Local(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
