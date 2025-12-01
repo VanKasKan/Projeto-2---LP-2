@@ -1,13 +1,17 @@
 package Objetos;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class Usuario {
+public class Usuario implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String login;
     private String senha;
     ArrayList<Personagem> personagens;
-    Scanner sc = new Scanner(System.in);
 
     public Usuario(String login, String senha){
         setLogin(login);
@@ -51,6 +55,8 @@ public class Usuario {
     }
 
     public void modificarSenha(){
+        Scanner sc = new Scanner(System.in);
+
         while (true){
 
             System.out.print("\n[1] Sair\nSenha atual: ");
@@ -80,6 +86,8 @@ public class Usuario {
     }
 
     public void modificarLogin(){
+        Scanner sc = new Scanner(System.in);
+
         while (true){
 
             System.out.print("\n[1] Sair\nSenha: ");

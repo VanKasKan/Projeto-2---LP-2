@@ -21,15 +21,26 @@ public class Main {
         System.out.print("\n===============\nBem-vindo(a)\n===============\n");
         while (true){
 
+            if(usuarioAtual == null){
+
+            }
             System.out.print("\n===============\n");
-            System.out.print("\n[1] Entrar\n[2] Cadastrar-se\n[3] Configurações\n[4] Sair\n");
+            System.out.print("\n[1] Entrar\n[2] Cadastrar-se\n[3] Configurações\n[0] Sair\n");
             System.out.print("\n===============\n");
 
-            opc = opMenu.processaToken(1, 4);
+            opc = opMenu.processaToken(0, 3);
 
 
-            if(opc == 4){
-                System.out.print("Encerrando...");
+            if(opc == 0){
+                System.out.print("Salvando logins...\n");
+
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Dados/Logins.bin"))) {
+                    oos.writeObject(usuarios);
+                    System.out.println("Todos os usuários foram salvos no arquivo\nEncerrando...");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.print("Até logo!");
                 break;
             }
 
@@ -50,8 +61,72 @@ public class Main {
                             System.out.print("\nNão há logins, cadastre-se!\n");
 
                         }
+                        if(usuarios != null){
+                            while(true){
 
+                                System.out.print("\n===============\nLogin (v para voltar): ");
+                                String login = sc.next();
+
+                                if(login.equals("v")){
+
+                                    break;
+
+                                }
+
+                                System.out.print("\n");
+
+                                boolean achou = false;
+
+                                for (Usuario usuario : usuarios) {
+
+                                    if (usuario.verificaLogin(login)) {
+                                        achou = true;
+
+                                        while (true) {
+
+                                            System.out.print("\nSenha (v para voltar): ");
+                                            String senha = sc.next();
+
+                                            if (senha.equals("v")) {
+                                                break;
+                                            }
+
+                                            System.out.print("\n");
+
+                                            if (usuario.verificaSenha(senha)) {
+
+                                                usuarioAtual = usuario;
+                                                System.out.print("\nAbrindo usuário...\n");
+
+                                                System.out.print("\n===============\n");
+                                                break;
+
+                                            } else {
+
+                                                System.out.print("\nSenha incorreta!\n");
+
+                                            }
+
+                                        }
+
+                                        break;
+
+                                    }
+                                }
+
+                                if (!achou){
+                                    System.out.print("\nLogin não encontrado!\n");
+
+                                    continue;
+                                }
+
+                                break;
+                            }
+                        }
                     }
+
+
+
                 } else {
 
                     while(true){
@@ -126,19 +201,6 @@ public class Main {
                 while(true){
 
                     if (usuarios == null) {
-
-                        if(!Files.exists(caminho)) {
-
-                            try {
-
-                                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Dados/Logins.bin"));
-
-                            } catch (IOException e) {
-
-                                System.out.print("\nErro ao criar o arquivo\n");
-
-                            }
-                        }
 
                         System.out.print("\nCarregando logins...\n");
 
@@ -315,7 +377,7 @@ public class Main {
 
                             } else {
 
-                                opMenu.setModoEscuro(false);
+                                opMenu.setModoEscuro(true);
                                 System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
 
                             }

@@ -53,11 +53,9 @@ public class Menu {
 
     public ArrayList<Usuario> carregaLogins() throws IOException, ClassNotFoundException{
 
-        System.out.print("\nCarregando logins...\n");
-
         ArrayList<Usuario> usuarios;
 
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Logins.bin"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Dados/Logins.bin"));
 
         usuarios = (ArrayList<Usuario>) ois.readObject();
 
