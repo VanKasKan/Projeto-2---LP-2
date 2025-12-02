@@ -36,6 +36,34 @@ public class Usuario implements Serializable{
         return senha;
     }
 
+    public ArrayList<Personagem> getPersonagens() {
+        return personagens;
+    }
+
+    public void addPersoinLista(Personagem personagem){
+        if(personagens == null){
+            personagens = new ArrayList<>();
+        }
+        this.personagens.add(personagem);
+    }
+
+    public void imprimePersonagens(){
+        System.out.print("\n===============\n");
+
+        for(int i = 0; i < getPersonagens().size(); i++){
+
+            System.out.print("\n\n["+(i+1)+"] "+getPersonagens().get(i).getNome()+"\n");
+
+            if(i+1 == getPersonagens().size()){
+
+                System.out.print("\n");
+
+            }
+        }
+
+        System.out.print("\n===============\n");
+    }
+
     public void imprimeLogin(){
         System.out.print("\nLogin: "+getLogin()+"\n");
     }

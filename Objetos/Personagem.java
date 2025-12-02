@@ -1,8 +1,12 @@
 package Objetos;
 
+import java.io.Serial;
 import java.util.HashMap;
+import java.io.Serializable;
 
-public abstract class Personagem {
+public abstract class Personagem implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String nome;
     private Arquetipo arquetipo;
@@ -10,11 +14,13 @@ public abstract class Personagem {
     private Trabalho trabalho;
     private HashMap<String, Integer> relacionamento;
 
-    public Personagem(String nome, Arquetipo arquetipo, int sociabilidade, Trabalho trabalho) {
-        setArquetipo(arquetipo);
+
+    public Personagem(String nome, int arquetipo) {
+
         setNome(nome);
-        setSociabilidade(sociabilidade);
-        setTrabalho(trabalho);
+        setArquetipo(arquetipo);
+        setSociabilidade();
+
     }
 
     public Arquetipo getArquetipo() {
@@ -33,23 +39,20 @@ public abstract class Personagem {
         return trabalho;
     }
 
-    private void setArquetipo(Arquetipo arquetipo) {
-        this.arquetipo = arquetipo;
+    public void setArquetipo(int arquetipo) {
+        this.arquetipo = Arquetipo.values()[arquetipo-1];
     }
 
-    private void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    private void setSociabilidade(int sociabilidade) {
-        if (sociabilidade >= 0) {
-            this.sociabilidade = sociabilidade;
-        } else {
-            this.sociabilidade = 0;
-        }
+    public void setSociabilidade() {
+
+        this.sociabilidade = 100;
     }
 
-    private void setTrabalho(Trabalho trabalho) {
+    public void setTrabalho(Trabalho trabalho) {
         this.trabalho = trabalho;
     }
 

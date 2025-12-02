@@ -13,7 +13,7 @@ public enum Arquetipo {
     SOLITARIO,
     RELIGIOSO,
     POTENCIA,
-    PESOMORTO,
+    PESO_MORTO,
     POPULAR,
     CAPETA,
     OBSTINADO,
