@@ -1,7 +1,7 @@
 package Objetos;
 
 public enum Interesses {
-    ARTESMARCIAIS,
+    ARTES_MARCIAIS,
     ASTROLOGIA,
     HONKAI,
     HISTORIA,

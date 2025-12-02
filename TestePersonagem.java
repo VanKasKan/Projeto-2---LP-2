@@ -106,7 +106,7 @@ public class TestePersonagem {
                     int escolhaInteresse = sc.nextInt();
                     switch (escolhaInteresse) {
                         case 1:
-                            interesses = Interesses.ARTESMARCIAIS;
+                            interesses = Interesses.ARTES_MARCIAIS;
                             break;
                         case 2:
                             interesses = Interesses.HISTORIA;
@@ -125,7 +125,7 @@ public class TestePersonagem {
                     }
                 }
 
-                fichaDePersonagem = new Estudante(interesses, nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("ESTUDANTE"));
+                //fichaDePersonagem = new Estudante(interesses, nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("ESTUDANTE"));
                 break;
 
             case 2:
@@ -155,7 +155,7 @@ public class TestePersonagem {
                     }
                 }
 
-                fichaDePersonagem = new Professor(area, nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("PROFESSOR"));
+                //fichaDePersonagem = new Professor(area, nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("PROFESSOR"));
                 break;
             case 3:
                 System.out.println("Qual a área acadêmica do Professor?");
@@ -184,7 +184,7 @@ public class TestePersonagem {
                     }
                 }
 
-                fichaDePersonagem = new Pessoa(nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("PROFESSOR"));
+                //fichaDePersonagem = new Pessoa(nome, Arquetipo.valueOf(arquetipo), sociabilidade, Trabalho.valueOf("PROFESSOR"));
                 break;            
             default:
                 System.out.println("Essa opção não existe! Escolha um entre as opções.\n");

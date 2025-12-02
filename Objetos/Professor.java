@@ -3,9 +3,14 @@ package Objetos;
 public class Professor extends Personagem{
     private Area area;
 
-    public Professor(Area area, String nome, Arquetipo arquetipo, int sociabilidade, Trabalho trabalho ){
-        super(nome, arquetipo, sociabilidade, trabalho);
-        this.area = area;
+    public Professor(int area, String nome, int arquetipo){
+        super(nome, arquetipo);
+        setArea(area);
+        super.setTrabalho(Trabalho.PROFESSOR);
+    }
+
+    public void setArea(int area) {
+        this.area = Area.values()[area-1];
     }
 
     public Area getArea() {

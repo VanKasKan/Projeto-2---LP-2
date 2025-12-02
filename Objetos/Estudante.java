@@ -1,11 +1,21 @@
 package Objetos;
+import java.io.Serial;
+import java.io.Serializable;
 
 public class Estudante extends Personagem {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Interesses interesses;
 
-    public Estudante(Interesses interesses, String nome, Arquetipo arquetipo, int sociabilidade, Trabalho trabalho ){
-        super(nome, arquetipo, sociabilidade, trabalho);
-        this.interesses = interesses;
+    public Estudante(int interesses, String nome, int arquetipo){
+        super(nome, arquetipo);
+        setInteresses(interesses);
+        setTrabalho(Trabalho.ESTUDANTE);
+
+    }
+
+    public void setInteresses(int interesses) {
+        this.interesses = Interesses.values()[interesses-1];
     }
 
     public Interesses getInteresses() {
