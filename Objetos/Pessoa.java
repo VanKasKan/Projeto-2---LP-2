@@ -7,8 +7,5 @@ public class Pessoa extends Personagem{
         super(nome, arquetipo);
     };
 
-    @Override
-    public void alteraTemaAcademico() {
 
-    }
 }

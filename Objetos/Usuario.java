@@ -176,7 +176,7 @@ public class Usuario implements Serializable{
 
         } else {
 
-
+            personagens.get(index-1).alteraTemaAcademico(personagens.get(index-1));
 
         }
     }

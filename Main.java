@@ -318,15 +318,22 @@ public class Main {
                                     System.out.print("\n===============\n");
                                     System.out.print("\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar interesse\n[0] Sair\n");
                                     System.out.print("\n===============\n");
-                                    int alteracao = opMenu.processaToken(0, 5);
 
-                                    if(alteracao == 0){
-                                        break;
-                                    }
+                                } else if (!usuarioAtual.isEstudante(index)){
 
-                                    usuarioAtual.alteraListaPersonagens(alteracao, index);
+                                    System.out.print("\n===============\n");
+                                    System.out.print("\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar área\n[0] Sair\n");
+                                    System.out.print("\n===============\n");
 
                                 }
+
+                                int alteracao = opMenu.processaToken(0, 5);
+
+                                if(alteracao == 0){
+                                    continue;
+                                }
+
+                                usuarioAtual.alteraListaPersonagens(alteracao, index);
                             }
 
 

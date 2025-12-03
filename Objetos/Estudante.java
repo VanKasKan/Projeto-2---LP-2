@@ -23,26 +23,18 @@ public class Estudante extends Personagem {
         return interesses;
     }
 
-    public void alteraInteresse(){
-        Menu token = new Menu();
-
-        System.out.print("\n===============\n");
-        System.out.print("\nQual o novo interesse?\n");
-        System.out.print("\n[1] Artes Marciais\n[2] Astrologia\n[3] Honkai\n[4] História\n[5] Investimentos\n[0] Sair\n");
-        System.out.print("\n===============\n");
-        int novoInteresse = token.processaToken(0, 5);
-
-        if(novoInteresse == 0){
-            return;
-        } else {
-            setInteresses(novoInteresse);
-            System.out.print("\nInteresse mudou para "+getInteresses()+"\n");
-        }
-
+    @Override
+    public void setTemaAcademico(int novoTema) {
+        setInteresses(novoTema);
     }
 
     @Override
-    public void alteraTemaAcademico() {
+    public void exibeFicha() {
+        System.out.print("\n===============\n");
+        System.out.print("\nFicha do personagem\n");
 
+        System.out.print("\nNome: "+getNome()+"\nArquétipo: "+getArquetipo()+"\nSociabilidade: "+getSociabilidade()+"\nTrabalho: "+getTrabalho()+"\nInteresse: "+getInteresses()+"\n");
+
+        System.out.print("\n===============\n");
     }
 }

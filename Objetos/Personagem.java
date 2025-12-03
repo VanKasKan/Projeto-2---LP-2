@@ -131,4 +131,37 @@ public abstract class Personagem implements Serializable, PersonagensGerais{
         }
     }
 
- }
+    @Override
+    public void alteraTemaAcademico(PersonagensGerais personagem) {
+        Menu token = new Menu();
+
+        if(trabalho == Trabalho.ESTUDANTE){
+
+            System.out.print("\n===============\n");
+            System.out.print("\nNovo interesse\n");
+            System.out.print("\n[1] Artes Marciais\n[2] Astrologia\n[3] Honkai\n[4] História\n[5] Investimentos\n[0] Sair\n");
+            System.out.print("\n===============\n");
+            int novoInteresse = token.processaToken(0,5);
+            if(novoInteresse == 0){
+                return;
+            }
+            personagem.setTemaAcademico(novoInteresse);
+        } else if(trabalho == Trabalho.PROFESSOR){
+
+            System.out.print("\n===============\n");
+            System.out.print("\nNova área\n");
+            System.out.print("\n[1] Luta\n[2] Português\n[3] Língua estrangeira\n[4] Estratégia\n[5] História\n[0] Sair\n");
+            System.out.print("\n===============\n");
+            int novaArea = token.processaToken(0,5);
+            if(novaArea == 0){
+                return;
+            }
+            personagem.setTemaAcademico(novaArea);
+        }
+    }
+
+    @Override
+    public void setTemaAcademico(int novoTema) {
+
+    }
+}

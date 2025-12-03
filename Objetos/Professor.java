@@ -18,7 +18,17 @@ public class Professor extends Personagem{
     }
 
     @Override
-    public void alteraTemaAcademico() {
+    public void setTemaAcademico(int novoTema) {
+        setArea(novoTema);
+    }
 
+    @Override
+    public void exibeFicha() {
+        System.out.print("\n===============\n");
+        System.out.print("\nFicha do personagem\n");
+
+        System.out.print("\nNome: "+getNome()+"\nArquétipo: "+getArquetipo()+"\nSociabilidade: "+getSociabilidade()+"\nTrabalho: "+getTrabalho()+"\nÁrea: "+getArea()+"\n");
+
+        System.out.print("\n===============\n");
     }
 }
