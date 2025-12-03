@@ -305,7 +305,31 @@ public class Main {
 
                         } else if (opc2 == 2) {
 
-                            usuarioAtual.imprimePersonagens();
+                            while(true){
+                                usuarioAtual.imprimePersonagens();
+                                System.out.print("\n[0] Sair\n");
+                                int index = opMenu.processaToken(0, usuarioAtual.getPersonagens().size());
+                                if(index == 0){
+                                    break;
+                                }
+
+                                if(usuarioAtual.isEstudante(index)){
+
+                                    System.out.print("\n===============\n");
+                                    System.out.print("\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar interesse\n[0] Sair\n");
+                                    System.out.print("\n===============\n");
+                                    int alteracao = opMenu.processaToken(0, 5);
+
+                                    if(alteracao == 0){
+                                        break;
+                                    }
+
+                                    usuarioAtual.alteraListaPersonagens(alteracao, index);
+
+                                }
+                            }
+
+
 
                         } else {
                             int drkLght;

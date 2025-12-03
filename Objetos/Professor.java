@@ -16,5 +16,9 @@ public class Professor extends Personagem{
     public Area getArea() {
         return area;
     }
-    
+
+    @Override
+    public void alteraTemaAcademico() {
+
+    }
 }
