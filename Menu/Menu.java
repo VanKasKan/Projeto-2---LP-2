@@ -1,10 +1,8 @@
 package Menu;
 import java.io.*;
 
-import Objetos.Estudante;
-import Objetos.Personagem;
-import Objetos.Professor;
-import Objetos.Usuario;
+import Objetos.*;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -123,7 +121,7 @@ public class Menu {
 
     }
 
-    public void criaPersonagem(ArrayList<Personagem> personagens, Usuario usuarioAtual){
+    public void criaPersonagem(ArrayList<PersonagensGerais> personagens, Usuario usuarioAtual){
         Scanner sc = new Scanner(System.in);
 
         System.out.print("\n===============\n");

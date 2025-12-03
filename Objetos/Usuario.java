@@ -11,7 +11,7 @@ public class Usuario implements Serializable{
 
     private String login;
     private String senha;
-    ArrayList<Personagem> personagens;
+    ArrayList<PersonagensGerais> personagens;
 
     public Usuario(String login, String senha){
         setLogin(login);
@@ -36,7 +36,7 @@ public class Usuario implements Serializable{
         return senha;
     }
 
-    public ArrayList<Personagem> getPersonagens() {
+    public ArrayList<PersonagensGerais> getPersonagens() {
         return personagens;
     }
 
@@ -139,6 +139,44 @@ public class Usuario implements Serializable{
                 System.out.print("\nSenha incorreta!\n");
 
             }
+
+        }
+    }
+
+    public boolean verificaExistenciaNome(String nome){
+        for (PersonagensGerais personagem : personagens) {
+
+            if (nome.equals(personagem.getNome())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isEstudante(int index){
+
+        return personagens.get(index - 1).getTrabalho() == Trabalho.ESTUDANTE;
+
+    }
+
+    public void alteraListaPersonagens(int alteracao, int index){
+
+        if(alteracao == 1){
+            personagens.remove(index-1);
+        } else if(alteracao == 2){
+            personagens.get(index-1).exibeFicha();
+        } else if(alteracao == 3){
+
+            personagens.get(index-1).alteraNome(this);
+
+        } else if(alteracao == 4){
+
+            personagens.get(index-1).alteraArquetipo();
+
+        } else {
+
+            personagens.get(index-1).alteraTemaAcademico(personagens.get(index-1));
 
         }
     }
