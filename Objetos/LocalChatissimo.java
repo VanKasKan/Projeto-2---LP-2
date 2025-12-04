@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class LocalChatissimo extends Local {
 
-    private Random r = new Random();
+    private static final Random r = new Random();
+
 
     public LocalChatissimo(String nome, String descricao) {
         super(nome, descricao);

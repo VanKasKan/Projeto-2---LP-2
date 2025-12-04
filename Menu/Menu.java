@@ -1,6 +1,6 @@
 package Menu;
-import java.io.*;
 
+import java.io.*;
 import Objetos.*;
 
 import java.util.ArrayList;
@@ -11,41 +11,33 @@ public class Menu {
 
     private boolean modoEscuro;
 
-
-
     public boolean isModoEscuro() {
         return modoEscuro;
     }
 
-    public Menu(){
+    public Menu() {
         setModoEscuro(false);
     }
 
-    public int processaToken(int i, int j){
+    public int processaToken(int i, int j) {
         Scanner sc = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             try {
                 int tk;
                 System.out.print("Opção: ");
                 tk = sc.nextInt();
                 sc.nextLine();
 
-                if(tk < i || tk > j){
-
+                if (tk < i || tk > j) {
                     System.out.print("\nOpção inválida\n");
-
                 } else {
-
                     return tk;
-
                 }
 
-            } catch(InputMismatchException e) {
-
+            } catch (InputMismatchException e) {
                 System.out.print("\nOpção inválida\n");
                 sc.nextLine();
-
             }
         }
     }
@@ -54,29 +46,26 @@ public class Menu {
         this.modoEscuro = modoEscuro;
     }
 
-    public ArrayList<Usuario> carregaLogins() throws IOException, ClassNotFoundException{
-
+    public ArrayList<Usuario> carregaLogins() throws IOException, ClassNotFoundException {
         ArrayList<Usuario> usuarios;
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Dados/Logins.bin"));
-
         usuarios = (ArrayList<Usuario>) ois.readObject();
 
         return usuarios;
     }
 
-    public Usuario efetuaLogin(ArrayList<Usuario> usuarios){
+    public Usuario efetuaLogin(ArrayList<Usuario> usuarios) {
         Scanner sc = new Scanner(System.in);
 
-        while(true){
+        while (true) {
 
             System.out.print("\n===============\n[0] Voltar\nLogin: ");
             String login = sc.next();
 
-            if(login.equals("0")){
+            if (login.equals("0")) {
                 System.out.print("\nVoltando para o menu principal...\n");
                 return null;
-
             }
 
             System.out.print("\n");
@@ -86,42 +75,33 @@ public class Menu {
                 if (usuarioDaLista.verificaLogin(login)) {
 
                     while (true) {
-
                         System.out.print("\nSenha: ");
                         String senha = sc.next();
 
                         if (senha.equals("0")) {
                             System.out.print("\nVoltando para o menu principal...\n");
-                             return null;
+                            return null;
                         }
 
                         System.out.print("\n");
 
                         if (usuarioDaLista.verificaSenha(senha)) {
-
                             System.out.print("\nAbrindo usuário...\n");
-
                             System.out.print("\n===============\n");
                             return usuarioDaLista;
-
                         } else {
-
                             System.out.print("\nSenha incorreta!\n");
-
                         }
-
                     }
 
-                } else if(usuarioDaLista == usuarios.getLast()){
+                } else if (usuarioDaLista == usuarios.getLast()) {
                     System.out.print("\nLogin não encontrado\n");
                 }
             }
-
         }
-
     }
 
-    public void criaPersonagem(ArrayList<PersonagensGerais> personagens, Usuario usuarioAtual){
+    public void criaPersonagem(ArrayList<PersonagensGerais> personagens, Usuario usuarioAtual) {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("\n===============\n");
@@ -146,23 +126,19 @@ public class Menu {
         System.out.print("\n[16] Obstinado  [17] Sortudo              [18] Vilão       [19] Generica      [0] Sair\n");
         System.out.print("\n===============\n");
 
-
         int arquetipo = processaToken(0, 19);
 
-        if(arquetipo == 0){
-
+        if (arquetipo == 0) {
             return;
-
         }
 
         System.out.print("\n===============\n\nTrabalho\n[1] Estudante\n[2] Professor\n[0] Sair\n\n===============\n");
         int trabalho = processaToken(0, 2);
 
-        if(trabalho == 0){
-
+        if (trabalho == 0) {
             return;
 
-        } else if(trabalho == 1){
+        } else if (trabalho == 1) {
 
             System.out.print("\n===============\n\nInteresse\n\n[1] Artes Marciais\n[2] Astrologia\n[3] Honkai\n[4] História\n[5] Investimentos\n[0] Sair\n\n===============\n");
             int interesse = processaToken(0, 5);
@@ -193,11 +169,40 @@ public class Menu {
         }
     }
 
-    public ObjectOutputStream criaPastaLogins() throws IOException {
+    public void abrirCrudLocais(RepositorioLocais repo) {
 
+        CrudLocais crud = new CrudLocais(repo); // CORRETO
+
+        while (true) {
+            System.out.print("""
+                    
+                    ==========================
+                        MENU DE LOCAIS
+                    ==========================
+                    [1] Listar locais
+                    [2] Adicionar local
+                    [3] Editar local
+                    [4] Remover local
+                    [0] Voltar
+                    ==========================
+                    """);
+
+            int op = processaToken(0, 4);
+
+            switch (op) {
+                case 1 -> crud.listar();      
+                case 2 -> crud.adicionar();
+                case 3 -> crud.editar();
+                case 4 -> crud.remover();
+                case 0 -> {
+                    System.out.println("\nVoltando ao menu principal...");
+                    return;
+                }
+            }
+        }
+}
+    public ObjectOutputStream criaPastaLogins() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Dados/Logins.bin"));
         return oos;
-
     }
-
 }

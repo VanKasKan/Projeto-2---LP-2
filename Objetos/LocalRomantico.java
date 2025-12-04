@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class LocalRomantico extends Local {
 
-    private Random r = new Random();
+    private static final Random r = new Random();
 
     public LocalRomantico(String nome, String descricao) {
         super(nome, descricao);

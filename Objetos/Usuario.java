@@ -12,12 +12,16 @@ public class Usuario implements Serializable{
     private String login;
     private String senha;
     ArrayList<PersonagensGerais> personagens;
+    private RepositorioLocais locais;
+
 
     public Usuario(String login, String senha){
         setLogin(login);
         setSenha(senha);
 
         personagens = null;
+        locais = new RepositorioLocais();
+
     }
 
     public void setLogin(String login) {
@@ -34,6 +38,14 @@ public class Usuario implements Serializable{
 
     public String getSenha() {
         return senha;
+    }
+
+    public void setLocais(RepositorioLocais locais) {
+        this.locais = locais;
+    }
+
+    public RepositorioLocais getLocais(){
+        return locais;
     }
 
     public ArrayList<PersonagensGerais> getPersonagens() {
