@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class LocalQuieto extends Local {
 
-    private Random r = new Random();
+    private static final Random r = new Random();
 
     public LocalQuieto(String nome, String descricao) {
         super(nome, descricao);

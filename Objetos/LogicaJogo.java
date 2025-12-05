@@ -18,4 +18,9 @@ public class LogicaJogo {
             }
         }
     }
+    public static void limparTerminal() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+        }
+    }
 }
