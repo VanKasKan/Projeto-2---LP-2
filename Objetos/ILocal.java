@@ -1,8 +1,7 @@
 package Objetos;
-
 import java.util.ArrayList;
 
-public interface ILocal {
+public interface ILocal{
     void adicionar(Local local);
     Local obter(int indice);
     void remover(int indice);

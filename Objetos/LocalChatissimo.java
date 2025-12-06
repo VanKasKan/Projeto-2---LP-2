@@ -12,7 +12,7 @@ public class LocalChatissimo extends Local {
     }
 
     @Override
-    public void interagirSozinho(Personagem p) {
+    public void interagirSozinho(PersonagensGerais p) {
         String[] interacoes = {
             p.getNome() + " olha as horas no relógio da" + this.getNome() + "e percebe que o tempo está correndo ao contrário.",
             p.getNome() + " bate a própria cabeça na parede repeditamente para sentir algo.",
@@ -26,7 +26,7 @@ public class LocalChatissimo extends Local {
     }
 
     @Override
-    public void interagir2Personagens(Personagem p1, Personagem p2) {
+    public void interagir2Personagens(PersonagensGerais p1, PersonagensGerais p2) {
         String[] interacoes = {
             p1.getNome() + " verifica se " + p2.getNome() + " ainda está vivo e percebe que sim. Entretanto, se está acordado já é outra história.",
             p1.getNome() + " e " + p2.getNome() + " fazem doomscrolling em seus celulares ao mesmo tempo.",
@@ -40,7 +40,7 @@ public class LocalChatissimo extends Local {
     }
 
     @Override
-    public void interagir3Personagens(Personagem p1, Personagem p2, Personagem p3) {
+    public void interagir3Personagens(PersonagensGerais p1, PersonagensGerais p2, PersonagensGerais p3) {
         String[] interacoes = {
              p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " entram na " + this.getNome() + " e imediatamente esquecem por que vieram.",
             p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " tentam conversar, mas cada um começa um assunto diferente ao mesmo tempo.",

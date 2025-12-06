@@ -2,14 +2,15 @@ package Objetos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class RepositorioLocais {
+public class RepositorioLocais implements Serializable{
 
     private List<Local> locais = new ArrayList<>();
 
     public List<Local> getLocais() {
         return locais;
-    }
+    }   
 
     public void adicionar(Local local) {
         if (local == null)
