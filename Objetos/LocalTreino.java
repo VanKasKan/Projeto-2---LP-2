@@ -11,7 +11,7 @@ public class LocalTreino extends Local {
     }
 
     @Override
-    public void interagirSozinho(Personagem p) {
+    public void interagirSozinho(PersonagensGerais p) {
         String[] interacoes = {
             p.getNome() + " respira fundo e começa um aquecimento disciplinado.",
             p.getNome() + " treina socos repetidamente até sentir os braços queimarem.",
@@ -23,7 +23,7 @@ public class LocalTreino extends Local {
     }
 
     @Override
-    public void interagir2Personagens(Personagem p1, Personagem p2) {
+    public void interagir2Personagens(PersonagensGerais p1, PersonagensGerais p2) {
         String[] interacoes = {
             p1.getNome() + " e " + p2.getNome() + " fazem um breve aquecimento juntos.",
             p1.getNome() + " desafia " + p2.getNome() + " para um treino leve de sparring." + p2.getNome() + " exclama: 'vou nada, você só quer me bater de novo!'",
@@ -35,7 +35,7 @@ public class LocalTreino extends Local {
     }
 
     @Override
-    public void interagir3Personagens(Personagem p1, Personagem p2, Personagem p3) {
+    public void interagir3Personagens(PersonagensGerais p1, PersonagensGerais p2, PersonagensGerais p3) {
         String[] interacoes = {
             p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " fazem uma corrida para ver quem é o mais rápido.",
             p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " treinam combos sincronizados.",

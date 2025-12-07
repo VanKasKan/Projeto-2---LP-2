@@ -1,15 +1,14 @@
 package Objetos;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class LogicaJogo {
 
-    private Random random = new Random();
+    private static Random random = new Random();
 
-    public void executarJogo(ArrayList<PersonagensGerais> arrayPersonagens, RepositorioLocais locais) {
+    public static void executarJogo(ArrayList<PersonagensGerais> arrayPersonagens, RepositorioLocais locais) {
         try {
             for (PersonagensGerais personagem : arrayPersonagens) {
                 int evento = selecionarEvento(arrayPersonagens);
@@ -53,7 +52,7 @@ public class LogicaJogo {
     }
     }
 
-    public int selecionarEvento(ArrayList<PersonagensGerais> arrayPersonagens) {
+    public static int selecionarEvento(ArrayList<PersonagensGerais> arrayPersonagens) {
         boolean doisPersonagens = false;
         boolean tresPersonagens = false;
         int qtdPersonagens = arrayPersonagens.size();
@@ -86,7 +85,7 @@ public class LogicaJogo {
     return 1;
     }
 
-    public Local selecionaLocal(RepositorioLocais repositorioLocais) {
+    public static Local selecionaLocal(RepositorioLocais repositorioLocais) {
         List<Local> locais = repositorioLocais.getLocais();
 
         if (locais.isEmpty()){
@@ -97,6 +96,13 @@ public class LogicaJogo {
         int localSelecionado = random.nextInt(qtdLocais);
 
         return locais.get(localSelecionado);
+    }
+
+    public static void selecionarModo(int repeticoes,ArrayList<PersonagensGerais> arrayPersonagens, RepositorioLocais locais){
+        for (int i = 0; i < repeticoes; i++){
+            executarJogo(arrayPersonagens, locais);
+        }
+        return;
     }
 
     public static void limparTerminal() {

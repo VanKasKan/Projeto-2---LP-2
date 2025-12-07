@@ -212,8 +212,8 @@ public class Main {
 
                     } else if (usuarioAtual.getPersonagens().size() < 10) {
                         // Menu principal com personagens
-                        System.out.print("\n===============\n[1] Criar novo personagem\n[2] Lista de personagens\n[3] Gerenciar locais\n[4] Configurações\n[0] Voltar ao menu principal\n===============\n");
-                        opc2 = opMenu.processaToken(0, 4);
+                        System.out.print("\n===============\n[1] Criar novo personagem\n[2] Lista de personagens\n[3] Gerenciar locais\n[4] Configurações\n[5] Jogar\n[0] Voltar ao menu principal\n===============\n");
+                        opc2 = opMenu.processaToken(0, 5);
 
                         if (opc2 == 0) {
                             usuarioAtual = null;
@@ -248,6 +248,12 @@ public class Main {
                             CrudLocais crudLocais = new CrudLocais(usuarioAtual.getLocais());
                             crudLocais.executar();
 
+                        } else if (opc2 == 5) {
+
+                            System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 5 vezes\n===============\n");
+                            int index = opMenu.processaToken(1, 5);
+                            LogicaJogo.selecionarModo(index, usuarioAtual.getPersonagens(), usuarioAtual.getLocais());
+                            System.out.println("pare");
                         } else { // Configurações
                             int drkLght;
 

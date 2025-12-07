@@ -28,9 +28,9 @@ public abstract class Local implements Serializable {
             this.descricao = descricao;
         }
 
-        public abstract void interagirSozinho(Personagem p);
+        public abstract void interagirSozinho(PersonagensGerais p);
 
-        public abstract void interagir2Personagens(Personagem p1, Personagem p2);
+        public abstract void interagir2Personagens(PersonagensGerais p1, PersonagensGerais p2);
 
-        public abstract void interagir3Personagens(Personagem p1, Personagem p2, Personagem p3);
+        public abstract void interagir3Personagens(PersonagensGerais p1, PersonagensGerais p2, PersonagensGerais p3);
     }

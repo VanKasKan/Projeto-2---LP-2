@@ -11,7 +11,7 @@ public class LocalRomantico extends Local {
     }
 
     @Override
-    public void interagirSozinho(Personagem p) {
+    public void interagirSozinho(PersonagensGerais p) {
         String[] interacoes = {
             p.getNome() + " se pergunta se vai ser amado de verdade um dia.",
             p.getNome() + " percebe que está muito sozinho para estar na ." + this.getNome() + " e vai embora,",
@@ -23,7 +23,7 @@ public class LocalRomantico extends Local {
     }
 
     @Override
-    public void interagir2Personagens(Personagem p1, Personagem p2) {
+    public void interagir2Personagens(PersonagensGerais p1, PersonagensGerais p2) {
         String[] interacoes = {
             p1.getNome() + " e " + p2.getNome() + " trocam olhares tímidos enquanto o clima de " + this.getNome() + " fica mais intenso.",
             p1.getNome() + " tenta iniciar uma conversa com " + p2.getNome() + ", mas ambos ficam corados e desviam o olhar.",
@@ -41,7 +41,7 @@ public class LocalRomantico extends Local {
     }
 
     @Override
-    public void interagir3Personagens(Personagem p1, Personagem p2, Personagem p3) {
+    public void interagir3Personagens(PersonagensGerais p1, PersonagensGerais p2, PersonagensGerais p3) {
         String[] interacoes = {
              p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " conversam calmamente, aproveitando a atmosfera suave de " + this.getNome() + ".",
             p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " riem juntos, criando lembranças aconchegantes.",
@@ -54,5 +54,6 @@ public class LocalRomantico extends Local {
             p1.getNome() + " observa discretamente " + p2.getNome() + " e " + p3.getNome() + " caminhando de mãos dadas."
         };
         System.out.println(interacoes[r.nextInt(interacoes.length)]);
+        LogicaJogo.limparTerminal();        
     }
 }

@@ -12,6 +12,7 @@ public class Usuario implements Serializable{
     private String login;
     private String senha;
     ArrayList<PersonagensGerais> personagens;
+    ArrayList<Personagem> personagensObjetos;
     private RepositorioLocais locais;
 
 

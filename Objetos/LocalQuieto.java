@@ -11,7 +11,7 @@ public class LocalQuieto extends Local {
     }
 
     @Override
-    public void interagirSozinho(Personagem p) {
+    public void interagirSozinho(PersonagensGerais p) {
         String[] interacoes = {
             p.getNome() + " consegue ouvir o próprio coração batendo.",
             p.getNome() + " nota que " + this.getNome() + " é um bom local para sangrar até morrer pacificamente.",
@@ -25,7 +25,7 @@ public class LocalQuieto extends Local {
     }
 
     @Override
-    public void interagir2Personagens(Personagem p1, Personagem p2) {
+    public void interagir2Personagens(PersonagensGerais p1, PersonagensGerais p2) {
         String[] interacoes = {
             p1.getNome() + " faz um gesto para " + p2.getNome() + " ficar quieto. " + p2.getNome() + " nem estava falando.",
             p1.getNome() + " e " + p2.getNome() + " andam lado a lado em " + this.getNome() + " sem emitir um único som.",
@@ -39,7 +39,7 @@ public class LocalQuieto extends Local {
     }
 
     @Override
-    public void interagir3Personagens(Personagem p1, Personagem p2, Personagem p3) {
+    public void interagir3Personagens(PersonagensGerais p1, PersonagensGerais p2, PersonagensGerais p3) {
         String[] interacoes = {
              p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " tentam conversar em sussurros, mas desistem.",
             p1.getNome() + ", " + p2.getNome() + " e " + p3.getNome() + " ficam quietos juntos. Estranhamente, faz sentido.",

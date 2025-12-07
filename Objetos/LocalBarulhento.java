@@ -20,8 +20,6 @@ public class LocalBarulhento extends Local {
             p.getNome() + " derruba uma barra de metal e falha em chamar a atenção das pessoas."
         };
         System.out.println(interacoes[r.nextInt(interacoes.length)]);
-
-        
     }
 
     @Override
