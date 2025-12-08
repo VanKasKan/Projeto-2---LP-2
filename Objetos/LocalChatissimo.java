@@ -32,7 +32,7 @@ public class LocalChatissimo extends Local {
             p1.getNome() + " e " + p2.getNome() + " fazem doomscrolling em seus celulares ao mesmo tempo.",
             p1.getNome() + " tenta chamar " + p2.getNome() + " para fazer alguma coisa, mas nada vem em mente.",
             p1.getNome() + " e " + p2.getNome() + " estão paralisados e não se movem a 40 minutos.",
-            p1.getNome() + " busca animar as coisas com " + p2.getNome() + ", mas ficam entediados assim que entram na"+ this.getNome() + " .",
+            p1.getNome() + " busca animar as coisas com " + p2.getNome() + ", mas ficam entediados assim que entram na "+ this.getNome() + " .",
             p1.getNome() + " sugere que " + p2.getNome() + " toque no botão misterioso da " + this.getNome() + ". Ambos se arrependem imediatamente.",
             p1.getNome() + " e " + p2.getNome() + " ficam encarando o teto da " + this.getNome() + " como se esperassem uma revelação divina."
         };

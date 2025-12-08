@@ -24,7 +24,7 @@ public class LogicaJogo {
                         do {
                             int indexPersonagem = random.nextInt(arrayPersonagens.size());
                             personagem2 = arrayPersonagens.get(indexPersonagem);
-                        } while (personagem2 != personagem);
+                        } while (personagem2.equals(personagem));
 
                         local.interagir2Personagens(personagem, personagem2);
                         break;
@@ -36,7 +36,7 @@ public class LogicaJogo {
                         do {
                             int indexPersonagem = random.nextInt(arrayPersonagens.size());
                             personagem3 = arrayPersonagens.get(indexPersonagem);
-                        } while (personagem3 != personagem && personagem3 != personagem2);
+                        } while (personagem3.equals(personagem) || personagem3.equals(personagem2));
 
                         local.interagir3Personagens(personagem, personagem2, personagem3);
                         break;

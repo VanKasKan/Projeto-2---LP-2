@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -248,12 +249,13 @@ public class Main {
                             CrudLocais crudLocais = new CrudLocais(usuarioAtual.getLocais());
                             crudLocais.executar();
 
-                        } else if (opc2 == 5) {
-
-                            System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 5 vezes\n===============\n");
-                            int index = opMenu.processaToken(1, 5);
+                    } else if (opc2 == 5) {
+                            System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 10 vezes\n===============\n");
+                            int index = opMenu.processaToken(1, 10);
+                            LogicaJogo.limparTerminal();
                             LogicaJogo.selecionarModo(index, usuarioAtual.getPersonagens(), usuarioAtual.getLocais());
-                            System.out.println("pare");
+
+                            }
                         } else { // Configurações
                             int drkLght;
 
@@ -305,4 +307,3 @@ public class Main {
             }
         }
     }
-}
