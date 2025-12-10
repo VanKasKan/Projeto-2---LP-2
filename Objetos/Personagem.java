@@ -21,7 +21,6 @@ public abstract class Personagem implements Serializable, PersonagensGerais{
 
         setNome(nome);
         setArquetipo(arquetipo);
-        setSociabilidade();
 
     }
 
@@ -42,7 +41,10 @@ public abstract class Personagem implements Serializable, PersonagensGerais{
     }
 
     public void setArquetipo(int arquetipo) {
+
         this.arquetipo = Arquetipo.values()[arquetipo-1];
+        setSociabilidade();
+
     }
 
     public void setNome(String nome) {
@@ -51,7 +53,28 @@ public abstract class Personagem implements Serializable, PersonagensGerais{
 
     public void setSociabilidade() {
 
-        this.sociabilidade = 100;
+        if(getArquetipo() == Arquetipo.SORTUDO || getArquetipo() == Arquetipo.POTENCIA || getArquetipo() == Arquetipo.POPULAR || getArquetipo() == Arquetipo.CAPETA){
+
+            sociabilidade = 100;
+
+        } else if(getArquetipo() == Arquetipo.RELIGIOSO || getArquetipo() == Arquetipo.CONSELHO_ESTUDANTIL || getArquetipo() == Arquetipo.ATLETA){
+
+            sociabilidade = 75;
+
+        } else if(getArquetipo() == Arquetipo.OPERARIO || getArquetipo() == Arquetipo.OBSTINADO || getArquetipo() == Arquetipo.GENERICA || getArquetipo() == Arquetipo.ARTISTA){
+
+            sociabilidade = 50;
+
+        } else if(getArquetipo() == Arquetipo.PESO_MORTO || getArquetipo() == Arquetipo.HERDEIRO || getArquetipo() == Arquetipo.ESTUDIOSO || getArquetipo() == Arquetipo.AMNESICO){
+
+            sociabilidade = 25;
+
+        } else {
+
+            sociabilidade = 1;
+
+        }
+
     }
 
     public void setTrabalho(Trabalho trabalho) {
