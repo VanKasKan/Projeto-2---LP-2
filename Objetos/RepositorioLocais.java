@@ -6,13 +6,16 @@ import java.io.Serializable;
 
 public class RepositorioLocais implements Serializable{
 
-    private List<Local> locais = new ArrayList<>();
+    private List<Local> locais = null;
 
     public List<Local> getLocais() {
         return locais;
     }   
 
     public void adicionar(Local local) {
+        if(getLocais() == null){
+            locais = new ArrayList<>();
+        }
         if (local == null)
             throw new IllegalArgumentException("O local não pode ser nulo.");
 

@@ -21,7 +21,7 @@ public class Usuario implements Serializable{
         setSenha(senha);
 
         personagens = null;
-        locais = new RepositorioLocais();
+        locais = null;
 
     }
 

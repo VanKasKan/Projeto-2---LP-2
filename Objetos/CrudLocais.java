@@ -43,6 +43,10 @@ public class CrudLocais {
 
         var locais = repositorio.getLocais();
 
+        if(locais == null){
+            System.out.println("Nenhum local cadastrado.");
+            return;
+        }
         if (locais.isEmpty()) {
             System.out.println("Nenhum local cadastrado.");
             return;
