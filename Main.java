@@ -233,6 +233,11 @@ public class Main {
 
                                     } else if (opc2 == 1) {
 
+                                        if(usuarioAtual.getPersonagens().size() >= 10){
+                                            System.out.print("\nNúmero de personagens excedido!\n");
+                                            continue;
+                                        }
+
                                         opMenu.criaPersonagem(usuarioAtual.getPersonagens(), usuarioAtual);
 
                                     } else if (opc2 == 2) {
@@ -373,6 +378,12 @@ public class Main {
                                 crudLocais.executar();
 
                             } else if (opc2 == 5) {
+
+                                if(usuarioAtual.getPersonagens().isEmpty() || usuarioAtual.getLocais().isempty()){
+                                    System.out.print("\nVerifique as listas de locais e personagens, há algo faltando...\n");
+                                    continue;
+                                }
+
                                 System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 10 vezes\n===============\n");
                                 int index = opMenu.processaToken(1, 10);
                                 LogicaJogo.limparTerminal();

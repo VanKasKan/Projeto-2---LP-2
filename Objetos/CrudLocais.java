@@ -1,6 +1,7 @@
 package Objetos;
 
 import java.util.Scanner;
+import Menu.Menu;
 
 public class CrudLocais {
 
@@ -14,25 +15,27 @@ public class CrudLocais {
     
 
     public void executar() {
-        int opcao = -1;
+        Menu token = new Menu();
 
-        while (opcao != 0) {
+        while (true) {
             System.out.println("\n=== CRUD DE LOCAIS ===");
-            System.out.println("1 - Listar locais");
-            System.out.println("2 - Adicionar local");
-            System.out.println("3 - Editar local");
-            System.out.println("4 - Remover local");
-            System.out.println("0 - Voltar");
-            System.out.print("Escolha: ");
+            System.out.println("[1] Listar locais");
+            System.out.println("[2] Adicionar local");
+            System.out.println("[3] Editar local");
+            System.out.println("[4] Remover local");
+            System.out.println("[0] Voltar");
+            System.out.print("\n===============\n");
+            int opcao = token.processaToken(0, 4);
 
-            opcao = Integer.parseInt(sc.nextLine());
+            if(opcao == 0){
+                return;
+            }
 
             switch (opcao) {
                 case 1 -> listar();
                 case 2 -> adicionar();
                 case 3 -> editar();
                 case 4 -> remover();
-                case 0 -> System.out.println("Voltando...");
                 default -> System.out.println("Opção inválida.");
             }
         }
@@ -53,7 +56,7 @@ public class CrudLocais {
         }
 
         for (int i = 0; i < locais.size(); i++) {
-            System.out.println(i + " - " + locais.get(i).getNome()
+            System.out.println("["+(i+1)+"]" + locais.get(i).getNome()
                     + " (" + locais.get(i).getClass().getSimpleName() + ")");
         }
     }
@@ -62,13 +65,26 @@ public class CrudLocais {
         try {
             System.out.println("\n--- Adicionar Local ---");
 
+            System.out.print("\n[0] Voltar\n");
+
             System.out.print("Nome: ");
             String nome = sc.nextLine();
+
+            if(nome.equals("0")){
+                return;
+            }
 
             System.out.print("Descrição: ");
             String desc = sc.nextLine();
 
+            if(desc.equals("0")){
+                return;
+            }
+
             Local local = criarLocalPorTipo(nome, desc);
+            if(local == null){
+                return;
+            }
             repositorio.adicionar(local);
 
             System.out.println("Local adicionado com sucesso!");
@@ -80,18 +96,51 @@ public class CrudLocais {
 
     public void editar() {
         listar();
+
+        if(repositorio.getLocais() == null){
+            return;
+        }
+
+        System.out.print("[0] Voltar\n");
+
+
         try {
-            System.out.print("\nDigite o índice para editar: ");
-            int index = Integer.parseInt(sc.nextLine());
 
-            System.out.print("Novo nome: ");
-            String novoNome = sc.nextLine();
+            Menu token = new Menu();
+            int index = token.processaToken(0, repositorio.getLocais().size());
+            if(index == 0){
+                return;
+            }
 
-            System.out.print("Nova descrição: ");
-            String novaDesc = sc.nextLine();
+            System.out.print("\n===============\n");
+            System.out.print("\n[1] Editar nome\n[2] Editar descrição\n[0]Voltar\n");
+            System.out.print("\n===============\n");
+            int opcao = token.processaToken(0, 2);
 
-            Local novoLocal = criarLocalPorTipo(novoNome, novaDesc);
-            repositorio.substituir(index, novoLocal);
+            if(opcao == 0){
+
+                return;
+
+            } else if(opcao == 1){
+                System.out.print("\n[0] Voltar");
+                System.out.print("\nNovo nome: ");
+                String novoNome = sc.nextLine();
+
+                if(novoNome.equals("0")){
+                    return;
+                }
+
+                repositorio.getLocais().get(index-1).setNome(novoNome);
+
+            } else if(opcao == 2){
+                System.out.print("\n[0] Voltar");
+                System.out.print("\nNova descrição: ");
+                String novaDesc = sc.nextLine();
+                if(novaDesc.equals("0")){
+                    return;
+                }
+                repositorio.getLocais().get(index-1).setDescricao(novaDesc);
+            }
 
             System.out.println("Local atualizado!");
 
@@ -101,10 +150,20 @@ public class CrudLocais {
     }
 
     public  void remover() {
+        Menu token = new Menu();
         listar();
+        if(repositorio.getLocais() == null){
+            return;
+        }
+
         try {
-            System.out.print("\nÍndice para remover: ");
-            int index = Integer.parseInt(sc.nextLine());
+            System.out.print("\n[0] Voltar");
+            int index = token.processaToken(0, repositorio.getLocais().size());
+
+
+            if(index == 0){
+                return;
+            }
 
             repositorio.remover(index);
 
@@ -116,15 +175,23 @@ public class CrudLocais {
     }
 
     private Local criarLocalPorTipo(String nome, String desc) {
-        System.out.println("\nSelecione o tipo do local:");
-        System.out.println("1 - LocalChatissimo");
-        System.out.println("2 - LocalBarulhento");
-        System.out.println("3 - LocalQuieto");
-        System.out.println("4 - LocalRomantico");
-        System.out.println("5 - LocalTreino");
-        System.out.print("Escolha: ");
+        Menu token =  new Menu();
 
-        int tipo = Integer.parseInt(sc.nextLine());
+        System.out.print("\n===============\n");
+        System.out.println("\nSelecione o tipo do local:");
+        System.out.println("[1] LocalChatissimo");
+        System.out.println("[2] LocalBarulhento");
+        System.out.println("[3] LocalQuieto");
+        System.out.println("[4] LocalRomantico");
+        System.out.println("[5] LocalTreino");
+        System.out.println("[0] Voltar");
+        System.out.print("\n===============\n");
+
+        int tipo = token.processaToken(0, 5);
+
+        if(tipo == 0){
+            return null;
+        }
 
         return switch (tipo) {
             case 1 -> new LocalChatissimo(nome, desc);

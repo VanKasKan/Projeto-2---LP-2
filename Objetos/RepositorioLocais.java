@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class RepositorioLocais implements Serializable{
 
-    private List<Local> locais = null;
+    private ArrayList<Local> locais = null;
 
     public List<Local> getLocais() {
         return locais;
@@ -29,9 +29,9 @@ public class RepositorioLocais implements Serializable{
     }
 
     public void remover(int index) {
-        if (index < 0 || index >= locais.size())
+        if (index < 0 || index > locais.size())
             throw new IllegalArgumentException("Índice inválido.");
-        locais.remove(index);
+        locais.remove(index-1);
     }
 
     public void substituir(int index, Local novoLocal) {
@@ -57,5 +57,9 @@ public class RepositorioLocais implements Serializable{
     private boolean nomeExiste(String nome) {
         return locais.stream()
                 .anyMatch(l -> l.getNome().equalsIgnoreCase(nome));
+    }
+
+    public boolean isempty(){
+        return locais.isEmpty();
     }
 }
