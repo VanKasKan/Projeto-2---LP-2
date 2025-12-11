@@ -75,7 +75,7 @@ public class Main {
                             System.out.print("\nNão há logins carregados...\nCriando nova lista de logins...\n");
                         }
 
-                        System.out.print("\n===============\n\n[0] Sair\nNovo cadastro (v para voltar)\n");
+                        System.out.print("\n===============\n\n[0] Sair\nNovo cadastro\n");
                         System.out.print("\nLogin: ");
                         String login = sc.next();
 
@@ -144,6 +144,7 @@ public class Main {
 
                 while (true) {
 
+                    int encerra = -1;
                     // Se não houver personagens
                     if (usuarioAtual.getPersonagens() == null || usuarioAtual.getPersonagens().isEmpty()) {
 
@@ -213,97 +214,236 @@ public class Main {
 
                     } else if (usuarioAtual.getPersonagens().size() < 10) {
                         // Menu principal com personagens
-                        System.out.print("\n===============\n[1] Criar novo personagem\n[2] Lista de personagens\n[3] Gerenciar locais\n[4] Configurações\n[5] Jogar\n[0] Voltar ao menu principal\n===============\n");
-                        opc2 = opMenu.processaToken(0, 5);
 
-                        if (opc2 == 0) {
-                            usuarioAtual = null;
-                            break;
 
-                        } else if (opc2 == 1) {
-                            opMenu.criaPersonagem(usuarioAtual.getPersonagens(), usuarioAtual);
 
-                        } else if (opc2 == 2) {
-                            while (true) {
-                                usuarioAtual.imprimePersonagens();
-                                System.out.print("\n[0] Sair\n");
-                                int index = opMenu.processaToken(0, usuarioAtual.getPersonagens().size());
-                                if (index == 0) break;
+                        //se nao tiver locais
+                        while (true) {
 
-                                if (usuarioAtual.isEstudante(index)) {
-                                    System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar interesse\n[0] Sair\n===============\n");
-                                } else {
-                                    System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar área\n[0] Sair\n===============\n");
+                            if (usuarioAtual.getLocais() == null) {
+
+                                while(true){
+                                    System.out.print("\n===============\n[1] Criar novo personagem\n[2] Lista de personagens\n[3] Gerenciar locais\n[4] Configurações\n[0] Voltar ao menu principal\n===============\n");
+                                    opc2 = opMenu.processaToken(0, 4);
+
+                                    if (opc2 == 0) {
+
+                                        encerra = 0;
+                                        break;
+
+                                    } else if (opc2 == 1) {
+
+                                        if(usuarioAtual.getPersonagens().size() >= 10){
+                                            System.out.print("\nNúmero de personagens excedido!\n");
+                                            continue;
+                                        }
+
+                                        opMenu.criaPersonagem(usuarioAtual.getPersonagens(), usuarioAtual);
+
+                                    } else if (opc2 == 2) {
+
+                                        while (true) {
+
+                                            usuarioAtual.imprimePersonagens();
+
+                                            System.out.print("\n[0] Sair\n");
+
+                                            int index = opMenu.processaToken(0, usuarioAtual.getPersonagens().size());
+
+                                            if (index == 0) {
+
+                                                break;
+                                            }
+
+                                            if (usuarioAtual.isEstudante(index)) {
+
+                                                System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar interesse\n[0] Sair\n===============\n");
+
+                                            } else {
+
+                                                System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar área\n[0] Sair\n===============\n");
+
+                                            }
+
+                                            int alteracao = opMenu.processaToken(0, 5);
+                                            if (alteracao == 0) break;
+
+                                            usuarioAtual.alteraListaPersonagens(alteracao, index);
+                                        }
+
+                                    } else if (opc2 == 3) {
+
+                                        if (usuarioAtual.getLocais() == null) {
+
+                                            usuarioAtual.setLocais(new RepositorioLocais());
+
+                                        }
+                                        CrudLocais crudLocais = new CrudLocais(usuarioAtual.getLocais());
+                                        crudLocais.executar();
+
+                                        if(usuarioAtual.getLocais() != null){
+                                            break;
+
+                                        }
+
+                                    } else {
+                                        int drkLght;
+
+                                        while (true) {
+                                            if (opMenu.isModoEscuro()) {
+                                                System.out.print("\n===============\n[1] Modo claro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
+                                                drkLght = opMenu.processaToken(0, 2);
+
+                                                if (drkLght == 0) break;
+                                                else if (drkLght == 2) {
+                                                    System.out.print("\n===============\n");
+                                                    usuarioAtual.imprimeLogin();
+                                                    System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
+                                                    int opcao = opMenu.processaToken(0, 2);
+
+                                                    if (opcao == 0) break;
+                                                    else if (opcao == 2) usuarioAtual.modificarSenha();
+                                                    else usuarioAtual.modificarLogin();
+
+                                                } else {
+                                                    opMenu.setModoEscuro(false);
+                                                    System.out.print("\n===============\n\nModo claro ativado\n\n===============\n");
+                                                }
+
+                                            } else {
+                                                System.out.print("\n===============\n[1] Modo escuro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
+                                                drkLght = opMenu.processaToken(0, 2);
+
+                                                if (drkLght == 0) break;
+                                                else if (drkLght == 2) {
+                                                    System.out.print("\n===============\n");
+                                                    usuarioAtual.imprimeLogin();
+                                                    System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
+                                                    int opcao = opMenu.processaToken(0, 2);
+
+                                                    if (opcao == 0) break;
+                                                    else if (opcao == 2) usuarioAtual.modificarSenha();
+                                                    else usuarioAtual.modificarLogin();
+
+                                                } else {
+                                                    opMenu.setModoEscuro(true);
+                                                    System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
+                                                }
+                                            }
+                                        }
+
+                                    }
                                 }
 
-                                int alteracao = opMenu.processaToken(0, 5);
-                                if (alteracao == 0) continue;
-
-                                usuarioAtual.alteraListaPersonagens(alteracao, index);
-                            }
-
-                        } else if (opc2 == 3) {
-                            if (usuarioAtual.getLocais() == null) {
-                                usuarioAtual.setLocais(new RepositorioLocais());
-                            }
-                            CrudLocais crudLocais = new CrudLocais(usuarioAtual.getLocais());
-                            crudLocais.executar();
-
-                    } else if (opc2 == 5) {
-                            System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 10 vezes\n===============\n");
-                            int index = opMenu.processaToken(1, 10);
-                            LogicaJogo.limparTerminal();
-                            LogicaJogo.selecionarModo(index, usuarioAtual.getPersonagens(), usuarioAtual.getLocais());
 
                             }
-                        } else { // Configurações
-                            int drkLght;
+                            if(encerra == 0){
+                                break;
+                            }
 
-                            while (true) {
-                                if (opMenu.isModoEscuro()) {
-                                    System.out.print("\n===============\n[1] Modo claro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
-                                    drkLght = opMenu.processaToken(0, 2);
+                            System.out.print("\n===============\n[1] Criar novo personagem\n[2] Lista de personagens\n[3] Gerenciar locais\n[4] Configurações\n[5] Jogar\n[0] Voltar ao menu principal\n===============\n");
+                            opc2 = opMenu.processaToken(0, 5);
 
-                                    if (drkLght == 0) break;
-                                    else if (drkLght == 2) {
-                                        System.out.print("\n===============\n");
-                                        usuarioAtual.imprimeLogin();
-                                        System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
-                                        int opcao = opMenu.processaToken(0, 2);
+                            if (opc2 == 0) {
+                                encerra = 0;
+                                break;
 
-                                        if (opcao == 0) break;
-                                        else if (opcao == 2) usuarioAtual.modificarSenha();
-                                        else usuarioAtual.modificarLogin();
+                            } else if (opc2 == 1) {
+                                opMenu.criaPersonagem(usuarioAtual.getPersonagens(), usuarioAtual);
 
+                            } else if (opc2 == 2) {
+                                while (true) {
+                                    usuarioAtual.imprimePersonagens();
+                                    System.out.print("\n[0] Sair\n");
+                                    int index = opMenu.processaToken(0, usuarioAtual.getPersonagens().size());
+                                    if (index == 0) break;
+
+                                    if (usuarioAtual.isEstudante(index)) {
+                                        System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar interesse\n[0] Sair\n===============\n");
                                     } else {
-                                        opMenu.setModoEscuro(false);
-                                        System.out.print("\n===============\n\nModo claro ativado\n\n===============\n");
+                                        System.out.print("\n===============\n[1] Deletar\n[2] Exibir informações\n[3] Alterar nome\n[4] Alterar arquétipo\n[5] Alterar área\n[0] Sair\n===============\n");
                                     }
 
-                                } else {
-                                    System.out.print("\n===============\n[1] Modo escuro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
-                                    drkLght = opMenu.processaToken(0, 2);
+                                    int alteracao = opMenu.processaToken(0, 5);
+                                    if (alteracao == 0) continue;
 
-                                    if (drkLght == 0) break;
-                                    else if (drkLght == 2) {
-                                        System.out.print("\n===============\n");
-                                        usuarioAtual.imprimeLogin();
-                                        System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
-                                        int opcao = opMenu.processaToken(0, 2);
+                                    usuarioAtual.alteraListaPersonagens(alteracao, index);
+                                }
 
-                                        if (opcao == 0) break;
-                                        else if (opcao == 2) usuarioAtual.modificarSenha();
-                                        else usuarioAtual.modificarLogin();
+                            } else if (opc2 == 3) {
+                                if (usuarioAtual.getLocais() == null) {
+                                    usuarioAtual.setLocais(new RepositorioLocais());
+                                }
+                                CrudLocais crudLocais = new CrudLocais(usuarioAtual.getLocais());
+                                crudLocais.executar();
+
+                            } else if (opc2 == 5) {
+
+                                if(usuarioAtual.getPersonagens().isEmpty() || usuarioAtual.getLocais().isempty()){
+                                    System.out.print("\nVerifique as listas de locais e personagens, há algo faltando...\n");
+                                    continue;
+                                }
+
+                                System.out.print("\n===============\nEscolha o número de vezes que será o jogo rodará entre 1 a 10 vezes\n===============\n");
+                                int index = opMenu.processaToken(1, 10);
+                                LogicaJogo.limparTerminal();
+                                LogicaJogo.selecionarModo(index, usuarioAtual.getPersonagens(), usuarioAtual.getLocais());
+
+                            } else { // Configurações
+                                int drkLght;
+
+                                while (true) {
+                                    if (opMenu.isModoEscuro()) {
+                                        System.out.print("\n===============\n[1] Modo claro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
+                                        drkLght = opMenu.processaToken(0, 2);
+
+                                        if (drkLght == 0) break;
+                                        else if (drkLght == 2) {
+                                            System.out.print("\n===============\n");
+                                            usuarioAtual.imprimeLogin();
+                                            System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
+                                            int opcao = opMenu.processaToken(0, 2);
+
+                                            if (opcao == 0) break;
+                                            else if (opcao == 2) usuarioAtual.modificarSenha();
+                                            else usuarioAtual.modificarLogin();
+
+                                        } else {
+                                            opMenu.setModoEscuro(false);
+                                            System.out.print("\n===============\n\nModo claro ativado\n\n===============\n");
+                                        }
 
                                     } else {
-                                        opMenu.setModoEscuro(true);
-                                        System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
+                                        System.out.print("\n===============\n[1] Modo escuro\n[2] Configurações da conta\n[0] Voltar\n===============\n");
+                                        drkLght = opMenu.processaToken(0, 2);
+
+                                        if (drkLght == 0) break;
+                                        else if (drkLght == 2) {
+                                            System.out.print("\n===============\n");
+                                            usuarioAtual.imprimeLogin();
+                                            System.out.print("\n[1] Alterar login\n[2] Alterar senha\n[0] Voltar\n");
+                                            int opcao = opMenu.processaToken(0, 2);
+
+                                            if (opcao == 0) break;
+                                            else if (opcao == 2) usuarioAtual.modificarSenha();
+                                            else usuarioAtual.modificarLogin();
+
+                                        } else {
+                                            opMenu.setModoEscuro(true);
+                                            System.out.print("\n===============\n\nModo escuro ativado\n\n===============\n");
+                                        }
                                     }
                                 }
                             }
                         }
+
+                        usuarioAtual = null;
+                        break;
+
+
                     }
                 }
             }
         }
     }
+}
